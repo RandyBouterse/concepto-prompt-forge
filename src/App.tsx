@@ -1,34 +1,26 @@
+import React from 'react';
+import { ConceptoProvider } from './context/ConceptoContext';
+import PromptInput from './components/PromptInput';
+import ResultDisplay from './components/ResultDisplay';
 
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ConceptoProvider } from "./contexts/ConceptoContext";
-import Index from "./pages/Index";
-import LoadingPage from "./pages/LoadingPage";
-import ResultPage from "./pages/ResultPage";
-import NotFound from "./pages/NotFound";
-
-const queryClient = new QueryClient();
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
+function App() {
+  return (
     <ConceptoProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/loading" element={<LoadingPage />} />
-            <Route path="/result" element={<ResultPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
+      <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-extrabold text-gray-900">Concepto AI</h1>
+            <p className="mt-2 text-lg text-gray-600">
+              AI-Powered Product Management Document Generator
+            </p>
+          </div>
+          
+          <PromptInput />
+          <ResultDisplay />
+        </div>
+      </div>
     </ConceptoProvider>
-  </QueryClientProvider>
-);
+  );
+}
 
 export default App;
